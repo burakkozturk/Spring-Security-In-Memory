@@ -32,18 +32,24 @@ public class SecurityConfig {
     public UserDetailsService users(){
         UserDetails user1 = User.builder()
                 .username("burak")
-                .password("password")
+                .password(passwordEncoder().encode("password"))
                 .roles("USER")
                 .build();
 
         UserDetails user2 = User.builder()
                 .username("admin")
-                .password("adminpass")
+                .password(passwordEncoder().encode("adminPass"))
                 .roles("ADMIN")
                 .build();
 
+        UserDetails ayse = User.builder()
+                .username("ayse")
+                .password(passwordEncoder().encode("latte"))
+                .roles("USER")
+                .build();
 
-        return new InMemoryUserDetailsManager(user1,user2);
+
+        return new InMemoryUserDetailsManager(user1,user2,ayse);
     }
 
     @Bean
